@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Nqueens">
+    <output-path>$PROJECT_DIR$/out/artifacts/Nqueens</output-path>
+    <root id="archive" name="Nqueens.jar" />
+  </artifact>
+</component>

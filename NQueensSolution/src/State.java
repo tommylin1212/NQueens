@@ -5,19 +5,19 @@ class State extends ArrayList<Integer> {
     int Cost;
     private int NSize;
 
-    State(Integer size, ArrayList<Integer> start) {//public constructor SLOWER used once
+    State(Integer size, ArrayList<Integer> start) {//public constructor
         this.addAll(start);
         NSize = size;
-        Cost = getCheapCost(this.toArray(new Integer[0]));
+        Cost = getCost(this.toArray(new Integer[0]));
     }
 
-    private State(Integer size, Integer[] start, int cost) {//private constructor fast used constantly
+    private State(Integer size, Integer[] start, int cost) {//private constructor
         this.addAll(new ArrayList<>(Arrays.asList(start)));
         NSize = size;
         Cost = cost;
     }
 
-    private int getCheapCost(Integer[] integers) {//faster called when checking new possible states
+    private int getCost(Integer[] integers) {
         int Cost = 0;
         int offset;
         for (int row = 0; row < NSize; row++) {
@@ -35,18 +35,17 @@ class State extends ArrayList<Integer> {
     }
 
     State getNext() {//avoids constructing unnecessary State objects
-        Integer best[] = this.toArray(new Integer[0]);
+        Integer best[] = this.toArray(new Integer[0]);//convert to simple array for SPEEEEED
         Integer temp[];
-        int bestCost = getCheapCost(best);
-        int tempCost;
+        int bestCost = getCost(best);
         for (int i = 0; i < NSize; i++) {//col
-            for (int j = 0; j < NSize; j++) {//row
+            for (int j = 1; j < NSize; j++) {//row
                 temp = this.toArray(new Integer[0]);//convert to simple array for SPEEEEED
-                temp[i] = temp[i] + j % NSize;//cycle through available rows
-                tempCost = getCheapCost(temp);
-                if (tempCost < bestCost) {
+                temp[i] = (temp[i] + j) % NSize;//cycle through available rows
+                //tempCost = getCost(temp);
+                if (getCost(temp) < bestCost) {
                     best = temp;
-                    bestCost = tempCost;
+                    bestCost = getCost(temp);
                 }
             }
         }
@@ -59,9 +58,9 @@ class State extends ArrayList<Integer> {
             System.out.print('\n');
             for (int j = 0; j < NSize; j++) {//col
                 if (this.get(j) == i) {
-                    System.out.print(" Q ");//Queen
+                    System.out.print("Q ");//Queen
                 } else {
-                    System.out.print(" X ");//Not Queen
+                    System.out.print("X ");//Not Queen
                 }
             }
         }

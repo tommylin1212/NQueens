@@ -12,14 +12,12 @@ public class init {
         } else {
             NSize = Integer.parseInt(args[0]);
         }
-        int iteration = 0;
-        HillClimber HC = new HillClimber(randomState(NSize), iteration);
+        HillClimber HC = new HillClimber(randomState(NSize));
         State result;
         while (true) {
             result = HC.climb();
             if (result == null) {
-                iteration++;
-                HC = new HillClimber(randomState(NSize), iteration);
+                HC = new HillClimber(randomState(NSize));
             } else {
                 break;
             }

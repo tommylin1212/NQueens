@@ -13,7 +13,6 @@ class HillClimber {
             if (neighbor.Cost < current.Cost) {//made cost public for speed
                 current = neighbor;
             } else {
-                //System.out.println(" failed: "+neighbor.Cost+":"+current.Cost);
                 return null;
             }
         }
@@ -21,15 +20,3 @@ class HillClimber {
     }
 }
 
-/*
-
- if (neighbor.Cost == current.Cost) {//run on that plateau
-                current = neighbor;
-                counter++;
-            }
-            if (counter == iterationNum || neighbor.Cost > current.Cost) {//iterative plateau running with local min cutoff
-                System.out.println(iterationNum+" failed: "+neighbor.Cost+":"+current.Cost);
-                return null;
-            }
-
- */
